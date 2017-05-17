@@ -3,7 +3,7 @@ require "omniauth/monappy/version"
 module OmniAuth
   module Strategies
     class Monappy < OmniAuth::Strategies::OAuth2
-        option :name, 'monappy'
+        option :name, :monappy
 
         option :client_options, site: 'https://api.monappy.jp', authorize_path: '/oauth/authorize'
 
