@@ -5,16 +5,15 @@ module OmniAuth
         class Monappy < OmniAuth::Strategies::OAuth2
             option :name, :monappy
 
-            option :client_options, site: 'https://api.monappy.jp', authorize_path: '/oauth/authorize'
+            option :client_options, site: 'https://api.monappy.jp', authorize_path: '/oauth/authorize', token_path: '/oauth/token'
 
             uid { raw_info['User']['id'] }
 
             info do
                 {
                     id: raw_info['User']['id'],
-                    id: raw_info['User']['nickname'],
-                    id: raw_info['User']['mail'],
-                    id: raw_info['User']['id'],
+                    nickname: raw_info['User']['nickname'],
+                    mail: raw_info['User']['mail'],
                 }
             end
 
