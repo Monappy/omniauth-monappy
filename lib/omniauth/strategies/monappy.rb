@@ -6,6 +6,8 @@ module OmniAuth
             option :name, :monappy
 
             option :client_options, site: 'https://api.monappy.jp', authorize_path: '/oauth/authorize', token_path: '/oauth/token'
+            option :response_type, 'code'
+
 
             uid { raw_info['User']['id'] }
 
