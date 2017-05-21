@@ -8,19 +8,27 @@ module OmniAuth
             option :client_options, site: 'https://api.monappy.jp', authorize_path: '/oauth/authorize', token_path: '/oauth/token'
             option :response_type, 'code'
 
+            option :token_params, {
+                :parse => :json
+            }
 
-            uid { raw_info['User']['id'] }
+
+            uid { raw_info['id'] }
 
             info do
                 {
-                    id: raw_info['User']['id'],
-                    nickname: raw_info['User']['nickname'],
-                    mail: raw_info['User']['mail'],
+                    id: raw_info['id'],
+                    nickname: raw_info['nickname'],
+                    mail: raw_info['mail'],
+                    image: raw_info['image_url'],
+                    monacoin_address: raw_info['monacoin_address']
                 }
             end
 
             def raw_info
-                @raw_info ||= access_token.get('/oauth/userinfo').parsed
+		puts "get..."
+		@raw_info ||= JSON.parse(access_token.get('/oauth/userinfo').body)
+		p @raw_info
             end
 
             def callback_url
